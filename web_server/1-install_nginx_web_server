@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Installs and configures Nginx on Ubuntu machine
+apt-get update -y
+apt-get install nginx -y
+
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+
+service nginx restart
