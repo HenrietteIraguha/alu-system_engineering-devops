@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Configures Nginx with custom X-Served-By header
+apt-get update -y
+apt-get install nginx -y
+
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+
+HOSTNAME=$(hostname)
+sed -i "s/server_name _;/server_name _;\n\tadd_header X-Served-By $HOSTNAME;/" /etc/nginx/sites-enabled/default
+
+service nginx restart
