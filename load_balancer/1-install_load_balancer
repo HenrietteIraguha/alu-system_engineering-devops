@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Installs and configures HAproxy load balancer
+apt-get update -y
+apt-get install -y haproxy
+
+echo "ENABLED=1" >> /etc/default/haproxy
+
+cat > /etc/haproxy/haproxy.cfg << 'EOF'
+global
+    log /dev/log local0
+    maxconn 2048
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    retries 3
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+frontend http_front
+    bind *:80
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server 7035-web-01 3.92.192.114:80 check
+    server 7035-web-02 54.82.239.91:80 check
+EOF
+
+service haproxy restart
