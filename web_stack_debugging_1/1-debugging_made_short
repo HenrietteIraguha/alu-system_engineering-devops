@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Fixes nginx to listen on port 80 in 5 lines or less
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx stop
 nginx
