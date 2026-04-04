@@ -3,5 +3,6 @@
 sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
 sed -i 's/listen 80/listen 8080/' /etc/nginx/sites-enabled/default
 sed -i 's/listen \[::\]:80/listen [::]:8080/' /etc/nginx/sites-enabled/default
-nginx -s stop
-nginx
+pkill -f nginx || true
+sleep 1
+sudo -u nginx /usr/sbin/nginx
