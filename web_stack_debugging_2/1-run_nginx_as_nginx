@@ -5,4 +5,4 @@ sed -i 's/listen 80/listen 8080/' /etc/nginx/sites-enabled/default
 sed -i 's/listen \[::\]:80/listen [::]:8080/' /etc/nginx/sites-enabled/default
 pkill -f nginx || true
 sleep 1
-sudo -u nginx /usr/sbin/nginx
+su -s /bin/bash nginx -c "/usr/sbin/nginx"
